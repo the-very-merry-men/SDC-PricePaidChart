@@ -13,7 +13,7 @@ var db = mysql.createConnection({
 })
 
 var getList = function(callback) {
-  db.query('SELECT * FROM stocks;', (err, result, fields) => {
+  db.query('SELECT * FROM stocks;', (err, result) => {
     if (err) {
       callback(err);
     } else {
