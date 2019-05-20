@@ -34,7 +34,6 @@ app.get('/api/stocks/', (req, res)=> {
     if (err) {
       throw err;
     } else {
-      console.log('Hit SEND')
       res.send(results);
     }
   })
