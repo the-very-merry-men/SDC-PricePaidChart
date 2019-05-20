@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 const mysql = require('mysql');
+const bodyParser = require('body-parser')
+
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -23,6 +25,10 @@ var getList = function(callback) {
 
 // app.get('/', (req, res) => res.send('Hello World!'))
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true })) // parse application/json
+app.use(bodyParser.json())
+
+
 app.get('/api/stocks/', (req, res)=> {
   getList((err, results) => {
     if (err) {
