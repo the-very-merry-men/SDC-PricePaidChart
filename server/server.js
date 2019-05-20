@@ -25,11 +25,11 @@ var getList = function(callback) {
 
 // app.get('/', (req, res) => res.send('Hello World!'))
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true })) // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
+app.use(bodyParser.json());
 
 
-app.get('/api/stocks/', (req, res)=> {
+app.get('/api/stocks/', (req, res) => {
   getList((err, results) => {
     if (err) {
       throw err;
