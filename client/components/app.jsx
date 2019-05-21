@@ -5,7 +5,7 @@ class App extends Component {
   constructor(props) {
     super(props)
   }
-  render(props) {
+  render() {
     return (
       <div>
         I am a Price Paid Graph, or so I shall be, one day. 
@@ -14,4 +14,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;
