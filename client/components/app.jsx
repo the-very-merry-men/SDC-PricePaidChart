@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import Graph from './graph.jsx';
+import MainChart from './mainchart.jsx';
+import XaxisInfo from './xaxisinfo.jsx';
+// import YaxisInfo from './yaxisinfo.jsx';
 // import Faker from 'faker'
+
+const h2style = {
+  color: 'black',
+  fontFamily: '"DIN Pro", -apple-system, system-ui, sans-serif',
+};
 
 class App extends Component {
   constructor(props) {
@@ -9,8 +16,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div>This is a price-paid-graph.</div>
-        <Graph /> 
+        <h2 style={h2style}>Price Paid on Robinhood</h2>
+        {/* <XaxisInfo /> */}
+        <MainChart /> 
       </div>
     );
   }
