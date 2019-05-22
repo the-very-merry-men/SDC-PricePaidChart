@@ -11,20 +11,20 @@ let Stocks = db.define('stocks', {
   // id: Sequelize.INTEGER,
   name: Sequelize.STRING,
   ticker: Sequelize.STRING,
-  current_price: Sequelize.DECIMAL(10,2),
-  average_price: Sequelize.DECIMAL(10,2),
-  week52high: Sequelize.DECIMAL(10,2),
-  week52low: Sequelize.DECIMAL(10,2),
+  current_price: Sequelize.DECIMAL(10, 2),
+  average_price: Sequelize.DECIMAL(10, 2),
+  week52high: Sequelize.DECIMAL(10, 2),
+  week52low: Sequelize.DECIMAL(10, 2),
 });
 
 let Increments = db.define('increments', {
   stockId: Sequelize.INTEGER,
   price_increment_percentage: Sequelize.INTEGER,
-  price_increment_actual: Sequelize.DECIMAL(10,2),
+  price_increment_actual: Sequelize.DECIMAL(10, 2),
   people_paying_price_increment: Sequelize.INTEGER
 });
 
-
+// FYI, this API call will fail after June 1, 2019. The old API is deprecated. 
 db.sync({force: true}).then(() => {
   request({
     url: 'https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=Technology',
