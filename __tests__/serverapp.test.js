@@ -1,4 +1,4 @@
-const app = require('./serverapp');
+const app = require('../server/serverapp');
 const request = require('supertest');
 
 describe('Test GET methods', () => {
