@@ -1,18 +1,17 @@
 import React from 'react';
 
 const XaxisInfo = () => (
-  // <div class="_3bs3MFU9layPxpGyj4-iIW">
-  <div class="_10uvVBCvzlwa5XbchDNjIN">
-    {/* <header style="left: 0px;">
-      <h3>23% Lower</h3>
-      <p>Right Now</p>
-    </header> */}
-    <svg class="_1Uv4F-a4udvpymCW4KwdU3" width="676" height="125">
-      <circle cx="17.1864406779661" cy="190" r="7"></circle>
-      <line y1="50" y2="193" x1="17.1864406779661" x2="17.1864406779661" stroke="black"></line>
+  <g transform="translate(0,50)">
+    <svg height="175" width="1000" style={{color: 'black', fontFamily: '"DIN Pro", -apple-system, system-ui, sans-serif'}}>         
+      <line y1="115" y2="115" x1="0" x2="676" stroke="black"></line>
+      <circle cx="250" cy="115" r="7" />
+      <text y="138" x="250">Current Price</text>
+      <text y="133" x="600">52 Week High</text>
+      <text y="148" x="600">$xx.xx</text>
+      <text y="133" x="10">52 Week Low</text>
+      <text y="148" x="10">$xx.xx</text>     
     </svg>
-  </div>
-  // </div>
+  </g>
 );
 
 export default XaxisInfo;

@@ -20,6 +20,16 @@ var getList = function(callback) {
   });
 };
 
+var getTestList = function(callback) {
+  db.query('SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = 1;', (err, result) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(err, result);
+    }
+  });
+};
+
 // app.get('/', (req, res) => res.send('Hello World!'))
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
@@ -35,4 +45,13 @@ app.get('/api/stocks/', (req, res) => {
   });
 });
 
+app.get('/api/stocks/test', (req, res) => {
+  getTestList((err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(results);
+    }
+  });
+});
 module.exports = app;

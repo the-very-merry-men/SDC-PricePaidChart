@@ -15,13 +15,20 @@ let Stocks = db.define('stocks', {
   average_price: Sequelize.DECIMAL(10, 2),
   week52high: Sequelize.DECIMAL(10, 2),
   week52low: Sequelize.DECIMAL(10, 2),
+}, {
+  timestamps: false
 });
 
 let Increments = db.define('increments', {
   stockId: Sequelize.INTEGER,
-  price_increment_percentage: Sequelize.INTEGER,
-  price_increment_actual: Sequelize.DECIMAL(10, 2),
-  people_paying_price_increment: Sequelize.INTEGER
+  pip: Sequelize.INTEGER,
+  // pip: price increment percentage
+  pia: Sequelize.DECIMAL(10, 2),
+  // pia: price increment actual
+  pppi: Sequelize.INTEGER
+  // pppi: people paying price increment
+}, {
+  timestamps: false
 });
 
 // FYI, this API call will fail after June 1, 2019. The old API is deprecated. 
@@ -51,10 +58,10 @@ db.sync({force: true}).then(() => {
       for (let j = 3; j < 100; j += 3) {
         incrementData.push({
           stockId: i+1,
-          price_increment_percentage: j,
-          price_increment_actual: data[i].week52Low * (1 + 0.01 * j),
-          people_paying_price_increment: getRandomArbitrary(1000 * Math.random(), 0)
-        })
+          pip: j,
+          pia: data[i].week52Low * (1 + 0.01 * j),
+          pppi: getRandomArbitrary(1000 * Math.random(), 0)
+        });
       }
     }
     
