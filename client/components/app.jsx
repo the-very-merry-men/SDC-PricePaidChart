@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MainChart from './mainchart.jsx';
-import XaxisInfo from './xaxisinfo.jsx';
+
 // import YaxisInfo from './yaxisinfo.jsx';
 // import Faker from 'faker'
 
@@ -17,7 +17,6 @@ class App extends Component {
     return (
       <div>
         <h2 style={h2style}>Price Paid on Robinhood</h2>
-        {/* <XaxisInfo /> */}
         <MainChart /> 
       </div>
     );
