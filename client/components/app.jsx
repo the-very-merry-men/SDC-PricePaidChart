@@ -13,6 +13,18 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    fetch('http://localhost:3000/api/stocks/test')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({
+          stockData: data,
+          
+        });
+      });
+  }
   render() {
     return (
       <div>
