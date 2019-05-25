@@ -34,7 +34,9 @@ class App extends Component {
     return (
       <div>
         <h2 style={h2style}>Price Paid on Robinhood</h2>
-        <MainChart stockData = {this.state.stockData} maxPPPI = {this.state.maxPPPI} mPPPI = {this.state.maxPPPI ? this.state.maxPPPI.pppi : null} /> 
+        <MainChart 
+          stockData = {this.state.stockData} 
+          maxPPPI = {this.state.maxPPPI} /> 
       </div>
     );
   }
