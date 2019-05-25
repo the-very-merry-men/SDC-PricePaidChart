@@ -1,6 +1,6 @@
 import React from 'react';
 
-const YaxisInfo = () => (
+const YaxisInfo = (props) => (
   <g transform = "translate(500,0)">
     <text y="15">x% Lower</text>
     <text y="35">Right Now</text>

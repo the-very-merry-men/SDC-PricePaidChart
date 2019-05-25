@@ -12,8 +12,9 @@ const h2style = {
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
-  componentDidMount() {
+  componentWillMount() {
     fetch('http://localhost:3000/api/stocks/test')
       .then((response) => {
         return response.json();
@@ -25,11 +26,11 @@ class App extends Component {
         });
       });
   }
-  render() {
+  render(props) {
     return (
       <div>
         <h2 style={h2style}>Price Paid on Robinhood</h2>
-        <MainChart /> 
+        <MainChart stockData = {this.state.stockData}/> 
       </div>
     );
   }

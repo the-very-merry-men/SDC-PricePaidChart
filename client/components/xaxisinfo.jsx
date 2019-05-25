@@ -1,6 +1,6 @@
 import React from 'react';
 
-const XaxisInfo = () => (
+const XaxisInfo = (props) => (
   <g transform="translate(0,50)">
     <svg height="175" width="1000" style={{color: 'black', fontFamily: '"DIN Pro", -apple-system, system-ui, sans-serif'}}>         
       <line y1="115" y2="115" x1="0" x2="676" stroke="black"></line>
