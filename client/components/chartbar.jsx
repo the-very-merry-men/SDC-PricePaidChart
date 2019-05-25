@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChartBar = (props) => {
   return (
-    <rect rx="1" width="11.457627118644067" height="15.15284814378159" x={props.x} y="79.8471518562184" />
+    <rect width="11.457627118644067" height={props.height} x={props.x} y={96 - props.height} />
   );
 };
 

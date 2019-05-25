@@ -9,7 +9,9 @@ const MainChart = (props) => (
       
       <YaxisInfo stockData={props.stockData} />
       <XaxisInfo stockData={props.stockData}/>
-      <ChartBarsAll stockData={props.stockData}/>
+      <g transform="translate(0,50)">
+        <ChartBarsAll stockData={props.stockData} maxPPPI={props.maxPPPI}/>
+      </g>
     </svg>
   </div> 
 

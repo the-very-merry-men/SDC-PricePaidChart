@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MainChart from './mainchart.jsx';
+import _ from 'lodash';
 
 // import YaxisInfo from './yaxisinfo.jsx';
 // import Faker from 'faker'
@@ -22,7 +23,9 @@ class App extends Component {
       .then((data) => {
         this.setState({
           stockData: data,
-          
+          maxPPPI: _.maxBy(data, (stock) => {
+            return stock.pppi;
+          })
         });
       });
   }
@@ -30,7 +33,7 @@ class App extends Component {
     return (
       <div>
         <h2 style={h2style}>Price Paid on Robinhood</h2>
-        <MainChart stockData = {this.state.stockData}/> 
+        <MainChart stockData = {this.state.stockData} maxPPPI = {this.state.maxPPPI} /> 
       </div>
     );
   }
