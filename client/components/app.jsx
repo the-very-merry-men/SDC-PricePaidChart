@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MainChart from './mainchart.jsx';
 import _ from 'lodash';
 
+
 // import YaxisInfo from './yaxisinfo.jsx';
 // import Faker from 'faker'
 
@@ -33,7 +34,7 @@ class App extends Component {
     return (
       <div>
         <h2 style={h2style}>Price Paid on Robinhood</h2>
-        <MainChart stockData = {this.state.stockData} maxPPPI = {this.state.maxPPPI} /> 
+        <MainChart stockData = {this.state.stockData} maxPPPI = {this.state.maxPPPI} mPPPI = {this.state.maxPPPI ? this.state.maxPPPI.pppi : null} /> 
       </div>
     );
   }

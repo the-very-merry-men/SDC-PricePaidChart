@@ -51,15 +51,15 @@ db.sync({force: true}).then(() => {
         ticker: data[i].symbol,
         price: data[i].iexRealtimePrice,
         week52high: data[i].week52High,
-        week52low: data[i].week52Low,
+        week52low: data[i].week52Low || 0,
         average_price: getRandomArbitrary(data[i].week52High, data[i].week52Low),
         current_price: getRandomArbitrary(data[i].week52High, data[i].week52Low),
       })
-      for (let j = 3; j < 100; j += 3) {
+      for (let j = 0; j < 97; j += 3) {
         incrementData.push({
           stockId: i+1,
           pip: j,
-          pia: data[i].week52Low * (1 + 0.01 * j),
+          pia: data[i].week52Low + (0.01 * j * (data[i].week52High - data[i].week52Low)),
           pppi: getRandomArbitrary(1000 * Math.random(), 0)
         });
       }
