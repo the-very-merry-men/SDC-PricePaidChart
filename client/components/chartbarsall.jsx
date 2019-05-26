@@ -11,7 +11,9 @@ const ChartBarsAll = (props) => {
         x={xCoord} 
         key={index}
         pia={element.pia} 
-        height={(element.pppi / props.maxPPPI.pppi) * 96}/>);
+        height={(element.pppi / props.maxPPPI.pppi) * 96}
+        averagePricePaidX={props.averagePricePaidX}
+        currentPricePaidX={props.currentPricePaidX}/>);
     });
   } else {
     return null;

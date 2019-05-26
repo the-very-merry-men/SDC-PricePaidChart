@@ -16,11 +16,29 @@ const higherOrLower = (array) => {
   }
 };
 const YaxisInfo = (props) => (
-  <g transform = {props.stockData ? yAxisShift(props.stockData) : null}>
-    <text y="15">{props.stockData ? Math.abs(percentDiff(props.stockData)) : null}% {props.stockData ? higherOrLower(props.stockData) : null}</text>
-    <text y="35">Right Now</text>
-    <circle cx="20" cy="165" r="7"></circle>
-    <line y1="0" y2="115" x1="20 " x2="20" stroke="black" transform="translate(0,50)"></line>
+  <g transform = {props.stockData ? yAxisShift(props.stockData) : null} fill = "#f45531">
+    <text 
+      y="15" 
+      text-anchor="middle"
+      style={{
+        'font': 'normal 16px sans-serif',
+        'font-weight': '500'
+      }}>{props.stockData ? Math.abs(percentDiff(props.stockData)) : null}% {props.stockData ? higherOrLower(props.stockData) : null}</text>
+    <text 
+      y="35" 
+      text-anchor="middle"
+      style={{
+        'font': 'normal 12.1px sans-serif',
+        'font-weight': '300',
+        'letter-spacing': '0.2px'}}>Right Now</text>
+    <circle 
+      cy="165" 
+      r="7"></circle>
+    <line 
+      y1="0" 
+      y2="110" 
+      stroke="#f45531" 
+      transform="translate(0,50)"></line>
   </g>
 );
 
