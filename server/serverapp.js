@@ -21,7 +21,7 @@ var getList = function(callback) {
 };
 
 var getTestList = function(callback) {
-  db.query('SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = 1;', (err, result) => {
+  db.query('SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = 4;', (err, result) => {
     if (err) {
       callback(err);
     } else {
