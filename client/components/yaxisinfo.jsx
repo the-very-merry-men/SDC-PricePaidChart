@@ -21,16 +21,14 @@ const YaxisInfo = (props) => (
       y="15" 
       text-anchor="middle"
       style={{
-        'font': 'normal 16px sans-serif',
-        'font-weight': '500'
+        'font': 'normal 16px DINPro',
       }}>{props.stockData ? Math.abs(percentDiff(props.stockData)) : null}% {props.stockData ? higherOrLower(props.stockData) : null}</text>
     <text 
       y="35" 
       text-anchor="middle"
       style={{
-        'font': 'normal 12.1px sans-serif',
-        'font-weight': '300',
-        'letter-spacing': '0.2px'}}>Right Now</text>
+        'font': 'normal 13px DINPro'
+      }}>Right Now</text>
     <circle 
       cy="165" 
       r="7"></circle>

@@ -3,20 +3,19 @@ import MainChart from './mainchart.jsx';
 import _ from 'lodash';
 import styled from 'styled-components';
 import { createGlobalStyle } from "styled-components";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: DINPro;
-    font-weight: bold;
+    font-weight: 900;
     src: url("./texts/dinpro.otf") format("opentype");
   }
   body {
     font-family: "DINPro";
   }
   h2 {
-    font-weight: 500;
-    font-size: 25px;
-    letter-spacing: 0.14px;
+    font-size: 26px;
   }
 `;
 const Title = styled.h1`
@@ -58,9 +57,11 @@ class App extends Component {
     return (
       <AppWrap>
         <GlobalStyles />
-        Hello
         <div>
           <h2>Price Paid on Robinhood</h2>
+          <svg height="20" width="676">
+            <line y1="0" y2="0" x1="0" x2="676" stroke="black" fill="black"></line>
+          </svg>
           <MainChart 
             stockData = {this.state.stockData} 
             maxPPPI = {this.state.maxPPPI} /> 
