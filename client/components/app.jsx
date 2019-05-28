@@ -1,36 +1,70 @@
 import React, { Component } from 'react';
 import MainChart from './mainchart.jsx';
+import _ from 'lodash';
+import styled from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-// import YaxisInfo from './yaxisinfo.jsx';
-// import Faker from 'faker'
 
-const h2style = {
-  color: 'black',
-  fontFamily: '"DIN Pro", -apple-system, system-ui, sans-serif',
-};
+const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: DINPro;
+    font-weight: 900;
+    src: url("/texts/dinpro.otf") format("opentype");
+  }
+  body {
+    font-family: DINPro;
+    font-weight: 100;
+  }
+  h2 {
+    font-family: DINPro;
+    font-size: 26px;
+  }
+`;
+const AppWrap = styled.section`
+  padding: 1em;
+  background: #1b1b1d;
+  color: #fff;
+`;
+
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
-  componentDidMount() {
-    fetch('http://localhost:3000/api/stocks/test')
+  componentWillMount() {
+    const ticker=window.location.pathname.split('/').slice(1,3)[1];
+    fetch(`http://localhost:3000/api/stocks/${ticker}`)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         this.setState({
           stockData: data,
-          
+          maxPPPI: _.maxBy(data, (stock) => {
+            return stock.pppi;
+          })
         });
       });
   }
-  render() {
+  createDate() {
+    let todaysDate = new Date();
+    
+  }
+  render(props) {
     return (
-      <div>
-        <h2 style={h2style}>Price Paid on Robinhood</h2>
-        <MainChart /> 
-      </div>
+      <AppWrap>
+        <GlobalStyles />
+        <div>
+          <h2>Price Paid on Robinhood</h2>
+          <svg height="20" width="676">
+            <line y1="0" y2="0" x1="0" x2="676" stroke="black" fill="black"></line>
+          </svg>
+          <MainChart 
+            stockData = {this.state.stockData} 
+            maxPPPI = {this.state.maxPPPI} /> 
+        </div>
+      </AppWrap>
     );
   }
 }

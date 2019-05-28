@@ -1,13 +1,23 @@
 import React from 'react';
 import ChartBar from './chartbar.jsx';
 
-const ChartBarsAll = () => {
-  return (
-    <g transform="translate(20,50)">
-      <ChartBar x="3%" />
-      <ChartBar x="6%" />
-    </g>
-  );
+const ChartBarsAll = (props) => {
+  console.log(props.stockData);
+  
+  if (props.stockData !== undefined && props.maxPPPI.pppi !== undefined) {
+    return props.stockData.map((element, index) => {
+      let xCoord = `${index * .01 * 3 * 700}`;
+      return (<ChartBar 
+        x={xCoord} 
+        key={index}
+        pia={element.pia} 
+        height={(element.pppi / props.maxPPPI.pppi) * 96}
+        averagePricePaidX={props.averagePricePaidX}
+        currentPricePaidX={props.currentPricePaidX}/>);
+    });
+  } else {
+    return null;
+  }
 };
 
 export default ChartBarsAll;
