@@ -54,7 +54,7 @@ db.sync({force: true}).then(() => {
         week52low: data[i].week52Low || 0,
         average_price: getRandomArbitrary(data[i].week52High, data[i].week52Low),
         current_price: getRandomArbitrary(data[i].week52High, data[i].week52Low),
-      })
+      });
       for (let j = 0; j < 97; j += 3) {
         incrementData.push({
           stockId: i+1,
@@ -67,6 +67,8 @@ db.sync({force: true}).then(() => {
     
     Increments.bulkCreate(incrementData);
     Stocks.bulkCreate(stocksData);
-    }
-  )
-})
+  });
+});
+
+module.exports.Stocks = Stocks;
+module.exports.Increments = Increments;

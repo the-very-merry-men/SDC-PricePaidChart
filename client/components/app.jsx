@@ -3,25 +3,22 @@ import MainChart from './mainchart.jsx';
 import _ from 'lodash';
 import styled from 'styled-components';
 import { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: DINPro;
     font-weight: 900;
-    src: url("./texts/dinpro.otf") format("opentype");
+    src: url("/texts/dinpro.otf") format("opentype");
   }
   body {
-    font-family: "DINPro";
+    font-family: DINPro;
+    font-weight: 100;
   }
   h2 {
+    font-family: DINPro;
     font-size: 26px;
   }
-`;
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
 `;
 const AppWrap = styled.section`
   padding: 1em;
@@ -36,7 +33,8 @@ class App extends Component {
     this.state = {};
   }
   componentWillMount() {
-    fetch('http://localhost:3000/api/stocks/test')
+    const ticker=window.location.pathname.split('/').slice(1,3)[1];
+    fetch(`http://localhost:3000/api/stocks/${ticker}`)
       .then((response) => {
         return response.json();
       })
