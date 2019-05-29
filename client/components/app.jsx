@@ -22,8 +22,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 const AppWrap = styled.section`
   padding: 1em;
-  background: #1b1b1d;
-  color: #fff;
+  background: white;
+  color: black;
 `;
 
 
@@ -34,7 +34,7 @@ class App extends Component {
   }
   componentWillMount() {
     const ticker=window.location.pathname.split('/').slice(1,3)[1];
-    fetch(`http://localhost:3000/api/stocks/${ticker}`)
+    fetch(`/api/stocks/${ticker}`)
       .then((response) => {
         return response.json();
       })

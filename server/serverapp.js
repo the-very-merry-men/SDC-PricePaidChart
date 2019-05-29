@@ -4,7 +4,11 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const path = require('path');
 const database = require('./database.js');
+const cors = require('cors');
 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -24,7 +28,7 @@ var getList = function(callback) {
 };
 
 const getPricePaid = (ticker, callback) => {
-  db.query(`SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.ticker = '${ticker}';`, (err, result) => {
+  db.query(`SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = ${Math.floor(getRandomArbitrary(0, 100))};`, (err, result) => {
     if (err) {
       callback(err);
     } else {
@@ -63,6 +67,7 @@ var getTestList = function(callback) {
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get('/stocks/:stock', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));

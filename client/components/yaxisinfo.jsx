@@ -16,7 +16,7 @@ const higherOrLower = (array) => {
   }
 };
 const YaxisInfo = (props) => (
-  <g transform = {props.stockData ? yAxisShift(props.stockData) : null} fill = "#f45531">
+  <g transform = {props.stockData ? yAxisShift(props.stockData) : null} fill = "#21ce99">
     <text 
       y="15" 
       text-anchor="middle"
@@ -35,7 +35,7 @@ const YaxisInfo = (props) => (
     <line 
       y1="0" 
       y2="110" 
-      stroke="#f45531" 
+      stroke="#21ce99" 
       transform="translate(0,50)"></line>
   </g>
 );
