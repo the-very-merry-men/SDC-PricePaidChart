@@ -27,29 +27,15 @@ var getList = function(callback) {
   });
 };
 
-const getPricePaid = (ticker, callback) => {
-  db.query(`SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = ${Math.floor(getRandomArbitrary(0, 100))};`, (err, result) => {
+const getPricePaid = (tickerId, callback) => {
+  db.query(`SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = ${tickerId};`, (err, result) => {
     if (err) {
       callback(err);
     } else {
       callback(err, result);
     }
   });
-  // database.Stocks.findAll({
-  //   attributes: ['id'],
-  //   where: {
-  //     ticker
-  //   }
-  // })
-  //   .then(data => database.Increments.findAll({
-  //     where: {stockId: data[0].id},
-  //     include: [{
-  //       model: 'database.Stocks',
-  //       required: true,
-  //     }]
-  //   }))
-  //   .then(data => callback(null, data))
-  //   .catch(error => callback(error, data));
+
 };
 
 var getTestList = function(callback) {
@@ -63,6 +49,16 @@ var getTestList = function(callback) {
 };
 
 
+
+
+/*
+Create / POST - create a new item
+Read / GET - read an item
+Update / PUT - update an item
+Delete / DELETE - delete an item
+Be sure to select the appropriate routes for each of these actions so they conform to the REST standard.
+
+*/
 // app.get('/', (req, res) => res.send('Hello World!'))
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
@@ -73,7 +69,12 @@ app.get('/stocks/:stock', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+
+/* GET /api/stocks/1 returns stock price paid 30 that points;
+*/
 app.get('/api/stocks/:stock/', (req, res) => {
+  console.log('inside api/stocks/:stock');
+  console.log(req.params.stock);
   getPricePaid(req.params.stock, (err, results) => {
     if (err) {
       throw err;

@@ -34,7 +34,7 @@ let Increments = db.define('increments', {
 // FYI, this API call will fail after June 1, 2019. The old API is deprecated. 
 db.sync({force: true}).then(() => {
   request({
-    url: 'https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=Technology',
+    url: 'https://cloud.iexapis.com/v1/stock/market/collection/sector?collectionName=Technology&token=pk_0731786ef98d4600991894316555c35f',
     headers: {
       'Content-type': 'application/json'
     }
@@ -57,7 +57,7 @@ db.sync({force: true}).then(() => {
       });
       for (let j = 0; j < 97; j += 3) {
         incrementData.push({
-          stockId: i+1,
+          stockId: i + 1,
           pip: j,
           pia: data[i].week52Low + (0.01 * j * (data[i].week52High - data[i].week52Low)),
           pppi: getRandomArbitrary(1000 * Math.random(), 0)
