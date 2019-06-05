@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MainChart from './mainchart.jsx';
 import _ from 'lodash';
 import styled from 'styled-components';
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 
 const GlobalStyles = createGlobalStyle`
@@ -33,7 +33,7 @@ class App extends Component {
     this.state = {};
   }
   componentWillMount() {
-    const ticker=window.location.pathname.split('/').slice(1,3)[1];
+    const ticker = window.location.pathname.split('/').slice(1, 3)[1];
     fetch(`/api/stocks/${ticker}`)
       .then((response) => {
         return response.json();
@@ -47,10 +47,7 @@ class App extends Component {
         });
       });
   }
-  createDate() {
-    let todaysDate = new Date();
-    
-  }
+
   render(props) {
     return (
       <AppWrap>

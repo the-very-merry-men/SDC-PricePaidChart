@@ -1,5 +1,5 @@
 {
-  "name": "Chaynor_Hsiao",
+  "name": "Marbo_Cheng-Ye",
   "version": "1.0.0",
   "description": "",
   "author": "",
@@ -8,6 +8,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "stocksData": "node --max-old-space-size=8192 database/stocksGenerator.js",
+    "incrementsData": "node --max-old-space-size=8192 database/incrementsGenerator.js",
     "seed": "node database/seed.js",
     "start": "nodemon server/server.js",
     "start-dev": "nodemon server/server.js",
