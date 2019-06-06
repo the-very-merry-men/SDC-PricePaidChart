@@ -14,7 +14,7 @@ var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'price_paid_chart'
+  database: 'robinhood'
 });
 
 var getList = function(callback) {

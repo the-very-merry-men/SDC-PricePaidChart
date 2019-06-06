@@ -33,7 +33,8 @@ class App extends Component {
     this.state = {};
   }
   componentWillMount() {
-    const ticker = window.location.pathname.split('/').slice(1, 3)[1];
+    var ticker = window.location.pathname.split('/').slice(1, 3)[1];
+    ticker = 8;
     fetch(`/api/stocks/${ticker}`)
       .then((response) => {
         return response.json();

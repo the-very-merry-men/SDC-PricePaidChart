@@ -1,14 +1,18 @@
 const Sequelize = require('sequelize');
 const request = require('request');
 
-let db = new Sequelize('price_paid_chart', 'root', '', {
+let db = new Sequelize('robinhood', 'root', '', {
   dialect: 'mysql', dialectOptions: {
     supportBigNumbers: true
   }
 });
 
 let Stocks = db.define('stocks', {
-  // id: Sequelize.INTEGER,
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   name: Sequelize.STRING,
   ticker: Sequelize.STRING,
   current_price: Sequelize.DECIMAL(10, 2),
@@ -20,6 +24,11 @@ let Stocks = db.define('stocks', {
 });
 
 let Increments = db.define('increments', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   stockId: Sequelize.INTEGER,
   pip: Sequelize.INTEGER,
   // pip: price increment percentage
@@ -47,6 +56,7 @@ db.sync({force: true}).then(() => {
     }
     for (let i = 0; i < 100; i++) {
       stocksData.push({
+        id: i + 1,
         name: data[i].companyName,
         ticker: data[i].symbol,
         price: data[i].iexRealtimePrice,
