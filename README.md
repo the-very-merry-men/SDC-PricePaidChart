@@ -1,9 +1,8 @@
-# price-you-paid-chart
-Robinhood, Price You Paid chart
+# Robinhood - Price You Paid chart
 
 # CRUD
                         
-                        CreateReadUpdateDelete OPERATIONS for Stock Chart System Design
+                        CRUD OPERATIONS for Price Paid Chart System Design Capstone
 
 
 
