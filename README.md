@@ -11,8 +11,7 @@ Robinhood, Price You Paid chart
 
 | API Endpoints  | Request Type | Input | Output | Description  |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| /api/stocks/:stock | GET  | {stockId: INT} | Status: 200
-{ "id": INT,
+| /api/stocks/:stock | GET  | {stockId: INT} | Status: 200{ "id": INT,
   "name": VARCHAR,
   "ticker": VARCHAR,
   "current_price": DOUBLE,
@@ -22,8 +21,7 @@ Robinhood, Price You Paid chart
    "stockId": INT,
    "pip": INT,
    "pia": DOUBLE,
-   "pppi": INT}
- | This request will return record of the stockId request from stocks tables  |
+   "pppi": INT}| This request will return record of the stockId request from stocks tables  |
 | /api/stock/ | POST  | stock name, stock ticker   | STATUS CODE 201  | Insert a new stock into the database  | 
 | /api/stocks/:stock | PUT  |  { "name": VARCHAR,
  "ticker": VARCHAR,
