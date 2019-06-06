@@ -17,13 +17,13 @@
 
 
 
-> ### STOCK DATA FOR ONE DAY, ONE WEEK, ONE MONTH, ONE YEAR, 5 YEARS
+> ### INCREMENTS TABLE
 
 | API Endpoints  | Request Type | Input | Output | Description  |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| /api/stocks/:ticker/prices/:type  | GET  | ticker id for a certain stock at a certain time increment  | stock prices STATUS CODE 200 | Get the stock prices for a given stock  |
-| /api/stocks/:ticker/prices/:type  | POST  | ticker id for a certain stock plus a new value to add to a database  | STATUS CODE 201  | Add a new price for a given stock  | 
-| /api/stocks/:ticker/prices/:type  | PUT  | ticker id and a new price to replace an older price at a specific index if applicable (latest if not)  | STATUS CODE 200  | Update a price (either the most recent or a specific price at a specific ID)  |
-| /api/stocks/:ticker/prices/:type  | DELETE  | ticker id and a specific ID if applicable (latest if not)  | STATUS CODE 200  | Delete a price (either the most recent or a specific price at a specific ID)   |
+| /api/increments/:stockId  | GET  | {stockId: INT}| Status: 200 {"id": INT,"stockId": INT,"pip": INT, "pia": DOUBLE,"pppi": INT }| This request will return 33 increments data point for the stockId requested || /api/increments/:stockId | POST  | { "stockId": INT,"pip": INT,"pia": DOUBLE,"pppi": INT }| Status: 201 Created
+  | This will create an increment for the stockId created.  | 
+| /api/increments/ | PUT  | {“incrementId: INT,"stockId": INT,"pip": INT,"pia": DOUBLE,"pppi": INT }| Status:200  | This will update the record on increment table that matches the increment id. |
+| /api/increments/:incrementId | DELETE  | {incrementId:INT} | Status: 200  | This will delete the record that matches increment id. |
 
 <img align="center" width="50" height="50" src="http://www.fillmurray.com/50/50">
