@@ -22,8 +22,7 @@
 | API Endpoints  | Request Type | Input | Output | Description  |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
 | /api/increments/:stockId  | GET  | {stockId: INT}| Status: 200 {"id": INT,"stockId": INT,"pip": INT, "pia": DOUBLE,"pppi": INT }| This request will return 33 increments data point for the stockId requested || 
-/api/increments/:stockId | POST  | { "stockId": INT,"pip": INT,"pia": DOUBLE,"pppi": INT }| Status: 201 Created
-  | This will create an increment for the stockId created.  | 
+/api/increments/:stockId | POST  | { "stockId": INT,"pip": INT,"pia": DOUBLE,"pppi": INT }| Status: 201 Created| This will create an increment for the stockId created.  | 
 | /api/increments/ | PUT  | {“incrementId: INT,"stockId": INT,"pip": INT,"pia": DOUBLE,"pppi": INT }| Status:200  | This will update the record on increment table that matches the increment id. |
 | /api/increments/:incrementId | DELETE  | {incrementId:INT} | Status: 200  | This will delete the record that matches increment id. |
 
