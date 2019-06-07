@@ -18,8 +18,8 @@ function write() {
     i--;
     if (i === 0) {
       // last time!
-      for (var x = 1; x <= 33; x++) {
-        var id = x + (counter - 1) * 33;
+      for (var x = 1; x <= 30; x++) {
+        var id = x + (counter - 1) * 30;
         var stockId = counter;
         var pip = faker.random.number({'min': 15, 'max': 90 });
         var pia = (faker.random.number({'min': 10, 'max': 500}) + (0.01 * pip * faker.random.number({'min': 10, 'max': 500}))).toFixed(2);
@@ -33,8 +33,8 @@ function write() {
     } else {
       // See if we should continue, or wait.
       // Don't pass the callback, because we're not done yet.
-      for (var x = 1; x <= 33; x++) {
-        var id = x + (counter - 1) * 33;
+      for (var x = 1; x <= 30; x++) {
+        var id = x + (counter - 1) * 30;
         var stockId = counter;
         var pip = faker.random.number({'min': 15, 'max': 90 });
         var pia = (faker.random.number({'min': 10, 'max': 500}) + (0.01 * pip * faker.random.number({'min': 10, 'max': 500}))).toFixed(2);
@@ -46,7 +46,7 @@ function write() {
       counter++;
     
       if (counter % 50000 === 0) {
-        console.log( counter * 33, 'Records');
+        console.log( counter * 30, 'Records');
       }
      
     }

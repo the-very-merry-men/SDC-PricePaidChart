@@ -8,7 +8,7 @@ var writeStream = fs.createWriteStream('stocks1.csv');
 writeStream.write('id,name,ticker,current_price,average_price,week52high,week52low\n');
 
 
-for (var i = 1; i < 10001; i++) {
+for (var i = 1; i < 1000000; i++) {
   var name = faker.name.firstName();
   //console.log(name);
   var ticker = name.toUpperCase().substring(0, 4);
