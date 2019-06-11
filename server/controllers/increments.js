@@ -1,7 +1,7 @@
 const postgresDb = require('../../database/dbPostgres.js');
 
 
-const getIncrements = (stockId, req, res) => {
+const getIncrements = (stockId, res) => {
   console.log('inside getincrements: stockId=', stockId);
   postgresDb.query(`SELECT * FROM increments, stocks WHERE increments.stockId = ${stockId} AND stocks.id=${stockId}`, (err, result)=> {
     if (err) {

@@ -34,8 +34,9 @@ class App extends Component {
   }
   componentWillMount() {
     var ticker = window.location.pathname.split('/').slice(1, 3)[1];
-    //ticker = 8;
+    ticker = Math.floor(Math.random() * 10000000);
     console.log(ticker);
+  
     fetch(`/api/stocks/${ticker}`)
       .then((response) => {
         return response.json();
