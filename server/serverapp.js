@@ -6,6 +6,9 @@ const path = require('path');
 const database = require('./database.js');
 const cors = require('cors');
 
+
+const postgres = require('./controllers/increments.js');
+
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -27,14 +30,22 @@ var getList = function(callback) {
   });
 };
 
-const getPricePaid = (tickerId, callback) => {
+const getPricePaid = (tickerId, req, res) => {
+  postgres.getIncrements(tickerId, req, res);
+  
+  /*
   db.query(`SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = ${tickerId};`, (err, result) => {
     if (err) {
-      callback(err);
+      res.status(400);
+      res.send(err);
+      //callback(err);
     } else {
-      callback(err, result);
+      res.status(200);
+      console.log(result);
+      res.send(result);
+      //callback(err, result);
     }
-  });
+  });*/
 
 };
 
@@ -74,14 +85,9 @@ app.get('/stocks/:stock', (req, res) => {
 */
 app.get('/api/stocks/:stock/', (req, res) => {
   console.log('inside api/stocks/:stock');
+ 
   console.log(req.params.stock);
-  getPricePaid(req.params.stock, (err, results) => {
-    if (err) {
-      throw err;
-    } else {
-      res.send(results);
-    }
-  });
+  getPricePaid(req.params.stock, req, res);
 });
 
 app.get('/api/stocks/', (req, res) => {
@@ -89,6 +95,7 @@ app.get('/api/stocks/', (req, res) => {
     if (err) {
       throw err;
     } else {
+      res.status(200);
       res.send(results);
     }
   });
