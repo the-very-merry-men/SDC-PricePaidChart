@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
-const path = require('path');
+//const path = require('path');
 const database = require('./database.js');
 const cors = require('cors');
 
@@ -44,9 +44,16 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/stocks/:stock', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+// app.get('/stocks/:stock', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public/index.html'));
+// });
+// app.get('/:stock/', (req, res) => {
+//   console.log('inside api/:stock/');
+  
+//   postgres.getIncrements(req.params.stock, res);
+//   //console.log(req.params.stock);
+  
+// });
 
 
 /* GET /api/stocks/1 returns stock price paid 30 that points;
