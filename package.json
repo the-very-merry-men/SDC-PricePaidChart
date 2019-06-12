@@ -9,7 +9,9 @@
   },
   "scripts": {
     "stocksData": "node --max-old-space-size=8192 database/stocksGenerator.js",
+    "stocksData2": "node --max-old-space-size=8192 database/stocksNoSQLGen.js",
     "incrementsData": "node --max-old-space-size=8192 database/incrementsGenerator.js",
+    "incrementsData2": "node --max-old-space-size=8192 database/incrementNoSQLGen.js",
     "seed": "node database/seed.js",
     "start": "nodemon server/server.js",
     "start-dev": "nodemon server/server.js",
@@ -20,6 +22,8 @@
     "faker": "^4.1.0",
     "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
+    "newrelic": "^5.9.1",
+    "pg": "^7.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",

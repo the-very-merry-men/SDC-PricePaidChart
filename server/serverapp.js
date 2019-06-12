@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
-const path = require('path');
+//const path = require('path');
 const database = require('./database.js');
 const cors = require('cors');
 
-function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
-}
+const relic = require('newrelic');
+
+const postgres = require('./controllers/increments.js');
+
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -27,28 +28,6 @@ var getList = function(callback) {
   });
 };
 
-const getPricePaid = (tickerId, callback) => {
-  db.query(`SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = ${tickerId};`, (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(err, result);
-    }
-  });
-
-};
-
-var getTestList = function(callback) {
-  db.query('SELECT * FROM stocks, increments where stocks.id = increments.stockId and stocks.id = 2;', (err, result) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(err, result);
-    }
-  });
-};
-
-
 
 
 /*
@@ -65,23 +44,25 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/stocks/:stock', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+// app.get('/stocks/:stock', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public/index.html'));
+// });
+// app.get('/:stock/', (req, res) => {
+//   console.log('inside api/:stock/');
+  
+//   postgres.getIncrements(req.params.stock, res);
+//   //console.log(req.params.stock);
+  
+// });
 
 
 /* GET /api/stocks/1 returns stock price paid 30 that points;
 */
 app.get('/api/stocks/:stock/', (req, res) => {
-  console.log('inside api/stocks/:stock');
-  console.log(req.params.stock);
-  getPricePaid(req.params.stock, (err, results) => {
-    if (err) {
-      throw err;
-    } else {
-      res.send(results);
-    }
-  });
+  //console.log('inside api/stocks/:stock');
+  postgres.getIncrements(req.params.stock, res);
+  //console.log(req.params.stock);
+  
 });
 
 app.get('/api/stocks/', (req, res) => {
@@ -89,18 +70,11 @@ app.get('/api/stocks/', (req, res) => {
     if (err) {
       throw err;
     } else {
+      res.status(200);
       res.send(results);
     }
   });
 });
 
-app.get('/api/stocks/test', (req, res) => {
-  getTestList((err, results) => {
-    if (err) {
-      throw err;
-    } else {
-      res.send(results);
-    }
-  });
-});
+
 module.exports = app;
