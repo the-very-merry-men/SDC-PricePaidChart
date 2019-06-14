@@ -1,34 +1,64 @@
+require('newrelic');
 const express = require('express');
 const app = express();
-const mysql = require('mysql');
+//const mysql = require('mysql');
 const bodyParser = require('body-parser');
 //const path = require('path');
-const database = require('./database.js');
+//const database = require('./database.js');
 const cors = require('cors');
 
-const relic = require('newrelic');
+//const relic = require('newrelic');
 
-const postgres = require('./controllers/increments.js');
+//const postgres = require('./controllers/increments.js');
+// const redis = require('redis');
+// const client = redis.createClient();
+const postgresDb = require('../database/dbPostgres.js');
 
 
-var db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'robinhood'
-});
+//var cache = 0;
 
-var getList = function(callback) {
-  db.query('SELECT * FROM stocks;', (err, result) => {
+
+const getIncrements = (req, res) => {
+  //console.log('inside getincrements: stockId=', stockId);
+  var stockId = req.params.stock;
+  //console.log(stockId); 
+  //stockId = 1;
+  //`SELECT * FROM stocks INNER JOIN increments ON stocks.id = increments.stockid AND stocks.id = ${stockId}`;
+  postgresDb.query(`SELECT * FROM increments, stocks WHERE increments.stockId = ${stockId} AND stocks.id=${stockId}`, (err, result)=> {
     if (err) {
-      callback(err);
-    } else {
-      callback(err, result);
-    }
+      res.status(400);
+      res.send();
+
+    } 
+    //console.log(result.rows);
+    // Set the string-key:stockId in our cache. With the contents of the cache : bookId
+    // Set cache expiration to 10 minutes (600 seconds)
+
+    //client.setex(stockId, 600, JSON.stringify(result.rows));
+    res.status(200);
+    res.send(result.rows);
+    
+
+    //callback(null, result.rows[0]);
+    //res.status(200).json(result.rows);
   });
 };
 
-
+// const getCache = (req, res) => {
+//   let stockId = req.params.stock;
+//   //console.log('inside getCache', req.params.stock);
+//   client.get(stockId, (err, result)=> {
+//     if (result) {
+//       //console.log('inside cache!', result);
+//       console.log('hit cache!', cache++);
+//       res.status(200);
+//       res.send(result);
+//     } else {
+//       //console.log('calling getIncrements inside cache');
+//       getIncrements(req, res);
+//     }
+//   });
+// };
 
 /*
 Create / POST - create a new item
@@ -60,19 +90,46 @@ app.use(cors());
 */
 app.get('/api/stocks/:stock/', (req, res) => {
   //console.log('inside api/stocks/:stock');
-  postgres.getIncrements(req.params.stock, res);
+  getIncrements(req, res);
   //console.log(req.params.stock);
   
 });
 
-app.get('/api/stocks/', (req, res) => {
-  getList((err, results) => {
+//using cache
+//app.get('/api/stocks/:stock/', getCache);
+
+// app.get('/api/stocks/', (req, res) => {
+//   getList((err, results) => {
+//     if (err) {
+//       throw err;
+//     } else {
+//       res.status(200);
+//       res.send(results);
+//     }
+//   });
+// });
+
+app.post('/api/increments/', (req, res) => {
+  //postgres.addIncrements(req, res);
+  //console.log(req.body);
+  const increment = req.body;
+  // res.status(200);
+  // res.send();
+  var str = '(' + increment.stockId + ',' + increment.pip + ',' + increment.pia + ',' + increment.pppi + ')';
+
+  // var stockId = counter;
+  // var pip = faker.random.number({'min': 15, 'max': 90 });
+  // var pia = (faker.random.number({'min': 10, 'max': 500}) + (0.01 * pip * faker.random.number({'min': 10, 'max': 500}))).toFixed(2);
+  // var pppi = faker.random.number({'min': 10, 'max': 999, });
+  //console.log(increment);
+  postgresDb.query(`INSERT INTO increments(stockid,pip,pia,pppi) VALUES ${str}`, (err, result)=> {
     if (err) {
-      throw err;
-    } else {
-      res.status(200);
-      res.send(results);
-    }
+      res.status(400);
+      res.send();
+
+    } 
+    res.status(200);
+    res.send(result);
   });
 });
 
