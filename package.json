@@ -16,7 +16,8 @@
     "start": "nodemon server/server.js",
     "start-dev": "nodemon server/server.js",
     "react-dev": "webpack -d --watch",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "cluster": "nodemon server/clusterserver.js"
   },
   "dependencies": {
     "faker": "^4.1.0",

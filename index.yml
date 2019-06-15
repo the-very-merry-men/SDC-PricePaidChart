@@ -1,0 +1,28 @@
+config:
+  target: 'http://localhost:3111'
+  phases:
+    - duration: 60 
+      arrivalRate: 10
+      rampTo: 100
+      name: "Index test"
+  
+
+ 
+scenarios:
+  - name: 'Index test'
+    flow:
+    - get:
+        url: "/?id={{ $randomNumber(1,10000000) }}"
+        # count: 10
+    
+    # - post:
+    #     url: "/api/increments/"
+    #     json: 
+    #       stockId: "{{ $randomNumber(1,10000000)}}"
+    #       pip: "{{ $randomNumber(15,90) }}"
+    #       pia: "{{ $randomNumber(200,700)}}"
+    #       pppi: "{{ $randomNumber(150,999)}}"
+    
+          
+
+
