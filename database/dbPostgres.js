@@ -9,16 +9,3 @@ const postgresDb = new Pool( {
 });
 
 module.exports = postgresDb;
-/*
-const getIncrements = (req, res) => {
-  pool.query('SELECT * FROM increments WHERE id = 1000', (err, result)=> {
-    if (err) {
-      throw err;
-    } 
-    console.log(result.rows[0]);
-    //res.status(200).json(result.rows);
-  });
-};
-
-
-*/

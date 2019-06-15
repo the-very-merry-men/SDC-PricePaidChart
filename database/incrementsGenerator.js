@@ -7,7 +7,7 @@ var writeStream = fs.createWriteStream('increments1.csv');
 
 writeStream.write('id,stockId,pip,pia,pppi\n');
 
-let i = 1000;
+let i = 10;
 var counter = 1;
 
 write();
