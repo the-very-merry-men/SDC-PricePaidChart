@@ -57,9 +57,9 @@ const getIncrements = (req, res) => {
     // Set the string-key:stockId in our cache. With the contents of the cache : bookId
     // Set cache expiration to 10 minutes (600 seconds)
 
-    client.set(stockId, 600, JSON.stringify(result.rows));
+    client.set(stockId, JSON.stringify(result.rows));
     res.status(200);
-    console.log(result.rows);
+  
     res.send(result.rows);
     
 
@@ -112,15 +112,15 @@ app.use(cors());
 
 /* GET /api/stocks/1 returns stock price paid 30 that points;
 */
-app.get('/api/stocks/:stock/', (req, res) => {
+// app.get('/api/stocks/:stock/', (req, res) => {
 
-  getIncrements(req, res);
-  //console.log(req.params.stock);
+//   getIncrements(req, res);
+//   //console.log(req.params.stock);
   
-});
+// });
 
 //using cache
-//app.get('/api/stocks/:stock/', getCache);
+app.get('/api/stocks/:stock/', getCache);
 
 // app.get('/api/stocks/', (req, res) => {
 //   getList((err, results) => {
