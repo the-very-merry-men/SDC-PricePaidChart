@@ -10,7 +10,7 @@ const Pool = require('pg').Pool;
 
 const postgresDb = new Pool( {
   user: 'postgres',
-  host: 'ec2-18-224-135-62.us-east-2.compute.amazonaws.com',
+  host: 'ec2-18-223-156-234.us-east-2.compute.amazonaws.com',
   database: 'postgres',
   password: 'password',
   port: 5432,
