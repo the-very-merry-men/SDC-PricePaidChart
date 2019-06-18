@@ -16,20 +16,43 @@ const postgresDb = require('../database/dbPostgres.js');
 
 
 //var cache = 0;
+// const getStocks = (req,res) => {
+//   var stockId = req.params.stock;
 
+    
+//   postgresDb.query(`SELECT  * FROM stocks WHERE id = ${stockId}`, (err, result)=> {
+//     if (err) {
+//       res.status(400);
+//       res.send();
+  
+//     } 
+
+// }
 
 const getIncrements = (req, res) => {
-  //console.log('inside getincrements: stockId=', stockId);
+  
   var stockId = req.params.stock;
+  //console.log('inside getincrements: stockId=', stockId);
   //console.log(stockId); 
   //stockId = 1;
   //`SELECT * FROM stocks INNER JOIN increments ON stocks.id = increments.stockid AND stocks.id = ${stockId}`;
-  postgresDb.query(`SELECT * FROM increments, stocks WHERE increments.stockId = ${stockId} AND stocks.id=${stockId}`, (err, result)=> {
+  // postgresDb.query(`SELECT * FROM increments, stocks WHERE increments.stockId = ${stockId} AND stocks.id=${stockId}`, (err, result)=> {
+  //   if (err) {
+  //     res.status(400);
+  //     res.send();
+
+  //   } 
+  
+  postgresDb.query(`SELECT stocks.week52high, stocks.week52low, stocks.average_price, stocks.current_price, increments.pia, increments.pppi, increments.pip FROM increments, stocks WHERE increments.stockId= ${stockId} AND stocks.id = ${stockId}`, (err, result)=> {
     if (err) {
       res.status(400);
       res.send();
-
+  
     } 
+  
+
+    //   } 
+    // }
     //console.log(result.rows);
     // Set the string-key:stockId in our cache. With the contents of the cache : bookId
     // Set cache expiration to 10 minutes (600 seconds)
@@ -89,7 +112,7 @@ app.use(cors());
 /* GET /api/stocks/1 returns stock price paid 30 that points;
 */
 app.get('/api/stocks/:stock/', (req, res) => {
-  //console.log('inside api/stocks/:stock');
+
   getIncrements(req, res);
   //console.log(req.params.stock);
   
@@ -110,25 +133,19 @@ app.get('/api/stocks/:stock/', (req, res) => {
 // });
 
 app.post('/api/increments/', (req, res) => {
-  //postgres.addIncrements(req, res);
-  //console.log(req.body);
-  const increment = req.body;
-  // res.status(200);
-  // res.send();
-  var str = '(' + increment.stockId + ',' + increment.pip + ',' + increment.pia + ',' + increment.pppi + ')';
 
-  // var stockId = counter;
-  // var pip = faker.random.number({'min': 15, 'max': 90 });
-  // var pia = (faker.random.number({'min': 10, 'max': 500}) + (0.01 * pip * faker.random.number({'min': 10, 'max': 500}))).toFixed(2);
-  // var pppi = faker.random.number({'min': 10, 'max': 999, });
-  //console.log(increment);
+  const increment = req.body;
+
+  var str = '(' + increment.stockId + ',' + increment.pip + ',' + increment.pia + ',' + increment.pppi + ')';
+ 
+
   postgresDb.query(`INSERT INTO increments(stockid,pip,pia,pppi) VALUES ${str}`, (err, result)=> {
     if (err) {
       res.status(400);
       res.send();
 
     } 
-    res.status(200);
+    res.status(202);
     res.send(result);
   });
 });

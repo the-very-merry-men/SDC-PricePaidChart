@@ -3,11 +3,11 @@
 var faker = require('faker');
 const fs = require('fs'); 
 
-var writeStream = fs.createWriteStream('increments1.csv');
+var writeStream = fs.createWriteStream('increments2.csv');
 
 writeStream.write('id,stockId,pip,pia,pppi\n');
 
-let i = 10;
+let i = 10000000;
 var counter = 1;
 
 write();
@@ -18,8 +18,8 @@ function write() {
     i--;
     if (i === 0) {
       // last time!
-      for (var x = 1; x <= 30; x++) {
-        var id = x + (counter - 1) * 30;
+      for (var x = 1; x <= 20; x++) {
+        var id = x + (counter - 1) * 20;
         var stockId = counter;
         var pip = faker.random.number({'min': 15, 'max': 90 });
         var pia = (faker.random.number({'min': 10, 'max': 500}) + (0.01 * pip * faker.random.number({'min': 10, 'max': 500}))).toFixed(2);
@@ -33,8 +33,8 @@ function write() {
     } else {
       // See if we should continue, or wait.
       // Don't pass the callback, because we're not done yet.
-      for (var x = 1; x <= 30; x++) {
-        var id = x + (counter - 1) * 30;
+      for (var x = 1; x <= 20; x++) {
+        var id = x + (counter - 1) * 20;
         var stockId = counter;
         var pip = faker.random.number({'min': 15, 'max': 90 });
         var pia = (faker.random.number({'min': 10, 'max': 500}) + (0.01 * pip * faker.random.number({'min': 10, 'max': 500}))).toFixed(2);
@@ -46,7 +46,7 @@ function write() {
       counter++;
     
       if (counter % 50000 === 0) {
-        console.log( counter * 30, 'Records');
+        console.log( counter * 20, 'Records');
       }
      
     }

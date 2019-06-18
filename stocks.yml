@@ -1,34 +1,45 @@
 config:
   target: 'http://localhost:3111'
+  # target: 'http://localhost:3030'
   phases:
-    - duration: 60 
-      arrivalRate: 100
-      rampTo: 300
-      name: "Warm up application"
-    - duration: 600
-      arrivalRate: 300
-      rampTo: 400
-      name: "Sustain max load"
-    - duration: 60
-      arrivalRate: 400
-      rampTo: 150
-      name: "End of day down"
+    # - duration: 60 
+    #   arrivalRate: 100
+    #   rampTo: 350
+    #   name: "Warm up application"
+    # - duration: 180
+    #   arrivalRate: 350
+    #   rampTo: 400
+    #   name: "Sustain max load"
+    # - duration: 20
+    #   arrivalRate: 390
+    #   rampTo: 100
+    #   name: "End of day down"
 
- 
+     
 scenarios:
-  - name: 'Stock increment search'
+  - name: 'GET Top Stocks increments '
+    weight: 7
     flow:
     - get:
         url: "/api/stocks/{{ $randomNumber(1,10000000) }}"
-        # count: 10
-    
-    # - post:
-    #     url: "/api/increments/"
-    #     json: 
-    #       stockId: "{{ $randomNumber(1,10000000)}}"
-    #       pip: "{{ $randomNumber(15,90) }}"
-    #       pia: "{{ $randomNumber(200,700)}}"
-    #       pppi: "{{ $randomNumber(150,999)}}"
+               
+  - name: 'GET others Stocks increments '
+    weight: 2    
+    flow:
+    - get:
+        url: "/api/stocks/{{ $randomNumber(20000001,10000000) }}"  
+
+  - name: 'POST Stock increments'
+    weight: 1
+    flow:
+    - post:
+        url: "/api/increments/"
+        json: 
+          stockId: "{{ $randomNumber(1,10000000)}}"
+          pip: "{{ $randomNumber(15,90) }}"
+          pia: "{{ $randomNumber(200,700)}}"
+          pppi: "{{ $randomNumber(150,999)}}"
+      
     
           
 

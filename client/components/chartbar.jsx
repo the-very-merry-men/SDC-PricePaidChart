@@ -6,7 +6,7 @@ const inRange = function(num, min, max) {
 
 const ChartBar = (props) => {
   return (
-    <rect width="14.8" 
+    <rect width="24.8" 
       height={props.height} 
       x={props.x} 
       y={96 - props.height} 
