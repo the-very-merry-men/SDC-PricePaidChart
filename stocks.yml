@@ -1,6 +1,8 @@
 config:
-  target: 'http://localhost:3111'
+  # target: 'http://localhost:3111'
   # target: 'http://localhost:3030'
+  target: 'http://ec2-3-14-8-107.us-east-2.compute.amazonaws.com:3111'
+  
   phases:
     # - duration: 60 
     #   arrivalRate: 100
@@ -14,6 +16,12 @@ config:
     #   arrivalRate: 390
     #   rampTo: 100
     #   name: "End of day down"
+
+    - duration: 60 
+      arrivalRate: 1
+      rampTo: 20
+      name: "Stress test ec2"
+    
 
      
 scenarios:
@@ -29,16 +37,16 @@ scenarios:
     - get:
         url: "/api/stocks/{{ $randomNumber(20000001,10000000) }}"  
 
-  - name: 'POST Stock increments'
-    weight: 1
-    flow:
-    - post:
-        url: "/api/increments/"
-        json: 
-          stockId: "{{ $randomNumber(1,10000000)}}"
-          pip: "{{ $randomNumber(15,90) }}"
-          pia: "{{ $randomNumber(200,700)}}"
-          pppi: "{{ $randomNumber(150,999)}}"
+  # - name: 'POST Stock increments'
+  #   weight: 1
+  #   flow:
+  #   - post:
+  #       url: "/api/increments/"
+  #       json: 
+  #         stockId: "{{ $randomNumber(1,10000000)}}"
+  #         pip: "{{ $randomNumber(15,90) }}"
+  #         pia: "{{ $randomNumber(200,700)}}"
+  #         pppi: "{{ $randomNumber(150,999)}}"
       
     
           
