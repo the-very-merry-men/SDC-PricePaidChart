@@ -16,7 +16,18 @@ const postgresDb = require('../database/dbPostgres.js');
 
 
 //var cache = 0;
+// const getStocks = (req,res) => {
+//   var stockId = req.params.stock;
 
+    
+//   postgresDb.query(`SELECT  * FROM stocks WHERE id = ${stockId}`, (err, result)=> {
+//     if (err) {
+//       res.status(400);
+//       res.send();
+  
+//     } 
+
+// }
 
 const getIncrements = (req, res) => {
   
