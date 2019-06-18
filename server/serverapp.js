@@ -68,21 +68,21 @@ const getIncrements = (req, res) => {
   });
 };
 
-// const getCache = (req, res) => {
-//   let stockId = req.params.stock;
-//   //console.log('inside getCache', req.params.stock);
-//   client.get(stockId, (err, result)=> {
-//     if (result) {
-//       //console.log('inside cache!', result);
-//       console.log('hit cache!', cache++);
-//       res.status(200);
-//       res.send(result);
-//     } else {
-//       //console.log('calling getIncrements inside cache');
-//       getIncrements(req, res);
-//     }
-//   });
-// };
+const getCache = (req, res) => {
+  let stockId = req.params.stock;
+  //console.log('inside getCache', req.params.stock);
+  client.get(stockId, (err, result)=> {
+    if (result) {
+      //console.log('inside cache!', result);
+      console.log('hit cache!', cache++);
+      res.status(200);
+      res.send(result);
+    } else {
+      //console.log('calling getIncrements inside cache');
+      getIncrements(req, res);
+    }
+  });
+};
 
 /*
 Create / POST - create a new item
