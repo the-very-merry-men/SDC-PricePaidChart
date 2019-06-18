@@ -120,7 +120,7 @@ app.use(cors());
 // });
 
 //using cache
-app.get('/api/stocks/:stock/', getCache);
+app.get('/api/stocks/:stock/', getCache); //
 
 // app.get('/api/stocks/', (req, res) => {
 //   getList((err, results) => {
