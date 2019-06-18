@@ -10,8 +10,8 @@ const cors = require('cors');
 //const relic = require('newrelic');
 
 //const postgres = require('./controllers/increments.js');
-// const redis = require('redis');
-// const client = redis.createClient();
+const redis = require('redis');
+const client = redis.createClient();
 const postgresDb = require('../database/dbPostgres.js');
 
 
@@ -57,8 +57,9 @@ const getIncrements = (req, res) => {
     // Set the string-key:stockId in our cache. With the contents of the cache : bookId
     // Set cache expiration to 10 minutes (600 seconds)
 
-    //client.setex(stockId, 600, JSON.stringify(result.rows));
+    client.set(stockId, 600, JSON.stringify(result.rows));
     res.status(200);
+    console.log(result.rows);
     res.send(result.rows);
     
 
