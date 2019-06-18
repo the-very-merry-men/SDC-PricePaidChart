@@ -15,7 +15,7 @@ const client = redis.createClient();
 const postgresDb = require('../database/dbPostgres.js');
 
 
-//var cache = 0;
+var cache = 0;
 // const getStocks = (req,res) => {
 //   var stockId = req.params.stock;
 
