@@ -37,7 +37,7 @@ const getIncrements = (req, res) => {
   
 
 
-    client.set(stockId, JSON.stringify(result.rows));
+    //client.set(stockId, JSON.stringify(result.rows));
     res.status(200);
   
     res.send(result.rows);
