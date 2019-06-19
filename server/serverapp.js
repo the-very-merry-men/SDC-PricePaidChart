@@ -7,12 +7,17 @@ const bodyParser = require('body-parser');
 //const database = require('./database.js');
 const cors = require('cors');
 
-//const relic = require('newrelic');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
+app.use(bodyParser.json());
+app.use(cors());
 
 //const postgres = require('./controllers/increments.js');
 const redis = require('redis');
 const client = redis.createClient();
 const postgresDb = require('../database/dbPostgres.js');
+
+
 
 
 var cache = 0;
@@ -93,10 +98,7 @@ Be sure to select the appropriate routes for each of these actions so they confo
 
 */
 // app.get('/', (req, res) => res.send('Hello World!'))
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true })); // parse application/json
-app.use(bodyParser.json());
-app.use(cors());
+
 
 // app.get('/stocks/:stock', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../public/index.html'));
