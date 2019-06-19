@@ -13,40 +13,20 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //const postgres = require('./controllers/increments.js');
-const redis = require('redis');
-const client = redis.createClient();
+// const redis = require('redis');
+// const client = redis.createClient();
 const postgresDb = require('../database/dbPostgres.js');
 
 
 
 
 var cache = 0;
-// const getStocks = (req,res) => {
-//   var stockId = req.params.stock;
 
-    
-//   postgresDb.query(`SELECT  * FROM stocks WHERE id = ${stockId}`, (err, result)=> {
-//     if (err) {
-//       res.status(400);
-//       res.send();
-  
-//     } 
-
-// }
 
 const getIncrements = (req, res) => {
   
   var stockId = req.params.stock;
-  //console.log('inside getincrements: stockId=', stockId);
-  //console.log(stockId); 
-  //stockId = 1;
-  //`SELECT * FROM stocks INNER JOIN increments ON stocks.id = increments.stockid AND stocks.id = ${stockId}`;
-  // postgresDb.query(`SELECT * FROM increments, stocks WHERE increments.stockId = ${stockId} AND stocks.id=${stockId}`, (err, result)=> {
-  //   if (err) {
-  //     res.status(400);
-  //     res.send();
 
-  //   } 
   
   postgresDb.query(`SELECT stocks.week52high, stocks.week52low, stocks.average_price, stocks.current_price, increments.pia, increments.pppi, increments.pip FROM increments, stocks WHERE increments.stockId= ${stockId} AND stocks.id = ${stockId}`, (err, result)=> {
     if (err) {
@@ -56,11 +36,6 @@ const getIncrements = (req, res) => {
     } 
   
 
-    //   } 
-    // }
-    //console.log(result.rows);
-    // Set the string-key:stockId in our cache. With the contents of the cache : bookId
-    // Set cache expiration to 10 minutes (600 seconds)
 
     client.set(stockId, JSON.stringify(result.rows));
     res.status(200);
@@ -68,8 +43,6 @@ const getIncrements = (req, res) => {
     res.send(result.rows);
     
 
-    //callback(null, result.rows[0]);
-    //res.status(200).json(result.rows);
   });
 };
 
@@ -114,15 +87,15 @@ Be sure to select the appropriate routes for each of these actions so they confo
 
 /* GET /api/stocks/1 returns stock price paid 30 that points;
 */
-// app.get('/api/stocks/:stock/', (req, res) => {
+app.get('/api/stocks/:stock/', (req, res) => {
 
-//   getIncrements(req, res);
-//   //console.log(req.params.stock);
+  getIncrements(req, res);
+  //console.log(req.params.stock);
   
-// });
+});
 
 //using cache
-app.get('/api/stocks/:stock/', getCache); //
+// app.get('/api/stocks/:stock/', getCache); //
 
 // app.get('/api/stocks/', (req, res) => {
 //   getList((err, results) => {
