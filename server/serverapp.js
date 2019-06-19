@@ -47,7 +47,7 @@ const getCache = (req, res) => {
   client.get(stockId, (err, result)=> {
     if (result) {
       //console.log('inside cache!', result);
-      console.log('hit cache!', cache++);
+      //console.log('hit cache!', cache++);
       res.status(200);
       res.send(result);
     } else {
