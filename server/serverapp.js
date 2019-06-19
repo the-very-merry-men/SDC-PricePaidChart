@@ -19,9 +19,7 @@ const postgresDb = require('../database/dbPostgres.js');
 
 
 
-
 var cache = 0;
-
 
 const getIncrements = (req, res) => {
   
@@ -34,12 +32,9 @@ const getIncrements = (req, res) => {
       res.send();
   
     } 
-  
-
 
     //client.set(stockId, JSON.stringify(result.rows));
     res.status(200);
-  
     res.send(result.rows);
     
 
@@ -114,7 +109,6 @@ app.post('/api/increments/', (req, res) => {
 
   var str = '(' + increment.stockId + ',' + increment.pip + ',' + increment.pia + ',' + increment.pppi + ')';
  
-
   postgresDb.query(`INSERT INTO increments(stockid,pip,pia,pppi) VALUES ${str}`, (err, result)=> {
     if (err) {
       res.status(400);
