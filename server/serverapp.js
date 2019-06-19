@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //const postgres = require('./controllers/increments.js');
-// const redis = require('redis');
-// const client = redis.createClient();
+const redis = require('redis');
+const client = redis.createClient();
 const postgresDb = require('../database/dbPostgres.js');
 
 
@@ -33,7 +33,7 @@ const getIncrements = (req, res) => {
   
     } 
 
-    //client.set(stockId, JSON.stringify(result.rows));
+    client.set(stockId, JSON.stringify(result.rows));
     res.status(200);
     res.send(result.rows);
     
@@ -82,15 +82,15 @@ Be sure to select the appropriate routes for each of these actions so they confo
 
 /* GET /api/stocks/1 returns stock price paid 30 that points;
 */
-app.get('/api/stocks/:stock/', (req, res) => {
+// app.get('/api/stocks/:stock/', (req, res) => {
 
-  getIncrements(req, res);
-  //console.log(req.params.stock);
+//   getIncrements(req, res);
+//   //console.log(req.params.stock);
   
-});
+// });
 
 //using cache
-// app.get('/api/stocks/:stock/', getCache); //
+app.get('/api/stocks/:stock/', getCache); //
 
 // app.get('/api/stocks/', (req, res) => {
 //   getList((err, results) => {
