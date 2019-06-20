@@ -33,7 +33,7 @@ const getIncrements = (req, res) => {
   
     } 
 
-    // client.set(stockId, JSON.stringify(result.rows));
+    client.set(stockId, JSON.stringify(result.rows));
     res.status(200);
     res.send(result.rows);
     
@@ -41,21 +41,21 @@ const getIncrements = (req, res) => {
   });
 };
 
-// const getCache = (req, res) => {
-//   let stockId = req.params.stock;
-//   //console.log('inside getCache', req.params.stock);
-//   client.get(stockId, (err, result)=> {
-//     if (result) {
-//       //console.log('inside cache!', result);
-//       //console.log('hit cache!', cache++);
-//       res.status(200);
-//       res.send(result);
-//     } else {
-//       //console.log('calling getIncrements inside cache');
-//       getIncrements(req, res);
-//     }
-//   });
-// };
+const getCache = (req, res) => {
+  let stockId = req.params.stock;
+  //console.log('inside getCache', req.params.stock);
+  client.get(stockId, (err, result)=> {
+    if (result) {
+      //console.log('inside cache!', result);
+      //console.log('hit cache!', cache++);
+      res.status(200);
+      res.send(result);
+    } else {
+      //console.log('calling getIncrements inside cache');
+      getIncrements(req, res);
+    }
+  });
+};
 
 /*
 Create / POST - create a new item
@@ -82,15 +82,15 @@ Be sure to select the appropriate routes for each of these actions so they confo
 
 /* GET /api/stocks/1 returns stock price paid 30 that points;
 */
-app.get('/api/stocks/:stock/', (req, res) => {
+// app.get('/api/stocks/:stock/', (req, res) => {
 
-  getIncrements(req, res);
-  //console.log(req.params.stock);
+//   getIncrements(req, res);
+//   //console.log(req.params.stock);
   
-});
+// });
 
 //using cache
-//app.get('/api/stocks/:stock/', getCache); //
+app.get('/api/stocks/:stock/', getCache); 
 
 // app.get('/api/stocks/', (req, res) => {
 //   getList((err, results) => {
