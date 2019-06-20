@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //const postgres = require('./controllers/increments.js');
-// const redis = require('redis');
-// const client = redis.createClient();
+const redis = require('redis');
+const client = redis.createClient();
 const postgresDb = require('../database/dbPostgres.js');
 
 
